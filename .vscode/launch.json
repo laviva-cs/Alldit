@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File (Integrated Terminal)",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "env":{
+        "MERRIAM_WEBSTER_LEARNERS_KEY":"466b3ce3-afa8-452d-b328-1fcb2853116f"
+      },
+      "args": [
+        "test"
+      ]
+    },
+    {
+      "name": "Python: Attach",
+      "type": "python",
+      "request": "attach",
+      "port": 5678,
+      "host": "localhost"
+    },
+    {
+      "name": "Python: Current File (External Terminal)",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "externalTerminal"
+    }
+  ]
+}
