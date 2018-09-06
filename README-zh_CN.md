@@ -24,7 +24,7 @@
 ```bash
 git clone https://github.com/laviva-cs/Alldit
 cd Alldit
-pip3 install PyQt5 pymongo
+pip3 install PyQt5 pymongo pygame
 python3 ./main.py
 ```
 
@@ -38,6 +38,8 @@ python3 ./main.py
 - [PyMongo](https://api.mongodb.com/python/current/)
 - [PyQt5](http://pyqt.sourceforge.net/Docs/PyQt5/)
 - [参考词典API实现](https://github.com/pfeyz/merriam-webster-api)
+- [pygame](https://www.pygame.org)
+- [Yattag](http://www.yattag.org/)
 
 ## 🤝 贡献代码
 让我们一起把Alldit做好！欢迎以 [pull requests](https://github.com/laviva-cs/Alldit/pulls) 和 [issues](https://github.com/laviva-cs/Alldit/issues) 的方式提交你的想法 :)

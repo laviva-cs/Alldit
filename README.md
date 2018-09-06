@@ -24,7 +24,7 @@ English | [简体中文](./README-zh_CN.md)
 ```bash
 git clone https://github.com/laviva-cs/Alldit
 cd Alldit
-pip3 install PyQt5 pymongo
+pip3 install PyQt5 pymongo pygame
 python3 ./main.py
 ```
 
@@ -37,7 +37,8 @@ python3 ./main.py
 - [PyMongo](https://api.mongodb.com/python/current/)
 - [PyQt5](http://pyqt.sourceforge.net/Docs/PyQt5/)
 - [Referenced Python API implementation](https://github.com/pfeyz/merriam-webster-api)
-
+- [PyGame](https://www.pygame.org)
+- [Yattag](http://www.yattag.org/)
 
 ## 🤝 Contributing
 
