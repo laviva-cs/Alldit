@@ -31,7 +31,7 @@ python3 ./main.py
 ## 🔨 使用
 暂未完成开发
 
-## 🔗 链接
+## 🔗 链接和引用
 - [本页](https://github.com/laviva-cs/Alldit)
 - [Merriam Webster Dictionary API](https://www.dictionaryapi.com/)
 - [MongoDB](https://www.mongodb.com/)
@@ -40,6 +40,7 @@ python3 ./main.py
 - [参考词典API实现](https://github.com/pfeyz/merriam-webster-api)
 - [pygame](https://www.pygame.org)
 - [Yattag](http://www.yattag.org/)
+- [Anki](https://ankiweb.net)
 
 ## 🤝 贡献代码
 让我们一起把Alldit做好！欢迎以 [pull requests](https://github.com/laviva-cs/Alldit/pulls) 和 [issues](https://github.com/laviva-cs/Alldit/issues) 的方式提交你的想法 :)

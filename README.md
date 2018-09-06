@@ -30,7 +30,7 @@ python3 ./main.py
 
 ## 🔨 Usage
 
-## 🔗 Links
+## 🔗 Links and credits
 - [Home page](https://github.com/laviva-cs/Alldit)
 - [Merriam Webster Dictionary API](https://www.dictionaryapi.com/)
 - [MongoDB](https://www.mongodb.com/)
@@ -39,6 +39,7 @@ python3 ./main.py
 - [Referenced Python API implementation](https://github.com/pfeyz/merriam-webster-api)
 - [PyGame](https://www.pygame.org)
 - [Yattag](http://www.yattag.org/)
+- [Anki](https://ankiweb.net)
 
 ## 🤝 Contributing
 
