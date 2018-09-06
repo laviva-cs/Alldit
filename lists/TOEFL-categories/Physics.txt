@@ -1,0 +1,40 @@
+industrial sewage 	工业污水
+recycling 	再循环
+deteriorate 	恶化
+air monitoring 	空气检测
+greenhouse effect 	温室效应
+ozone layer	臭氧层
+conservation of energy 	能量守恒
+newton’s laws of motions 	牛顿运动定律
+deceleration 	减速度
+centripetal force 	向心力
+acceleration of gravity 	重力加速度
+solidify 	固化
+liquefy 	液化
+conduction 	传导
+radiation 	辐射
+reflection 	反射
+refraction 	折射
+volume 	音量
+intensity	音强
+infrared ray 	红外线
+fluorescence 	荧光
+volt 	伏特
+magnet 	磁铁
+direct current 	直流电
+anode 	正极
+watt 	瓦特
+voltage 	电压
+magnetic force	磁力
+electrode 	电极
+cathode	负极
+centrifugal force 	离心力
+vaporize 	汽化
+gasify 	气化
+calorie 	卡路里
+convection 	对流
+expansion	膨胀
+resonance 	共振
+frequency 	频率
+pitch 	音调
+ultrasonics 	超声波

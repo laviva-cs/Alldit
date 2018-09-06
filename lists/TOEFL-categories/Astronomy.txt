@@ -1,0 +1,29 @@
+asterism 	星群
+eclipse 	日食 月食
+ultramundane 	太阳系之外的
+observatory 	天文台
+celestial body 	天体
+astronomer 	天文学家
+planetarium 	天文馆
+luminosity 	光度
+light year 	光年
+planet 	行星
+satellite 	卫星
+comet 	彗星
+constellation 	星座
+rotation 	自转
+solar system 	太阳系
+Mercury 	水星
+Venus	金星
+Earth 地球
+Mars 	火星
+Jupiter 	木星
+Saturn 	土星
+leap year 	闰年
+star 	恒星
+asteroid 	小行星
+meteorite 	流星
+galaxy 	星系
+revolution 	公转
+Milky Way 	银河系
+ultraviolet ray 	紫外线

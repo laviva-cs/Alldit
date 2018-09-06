@@ -1,0 +1,34 @@
+chemical element 	化学元素
+decomposition	分解
+radioactivity 	放射性
+dilution 	稀释
+reduction 	还原
+solution 	溶液
+test tube 	试管
+sensitivity 	灵敏度
+isotope 	同位素
+chemical reaction 	化学反应
+compound 	化合物
+oxidation 	氧化
+distillation 	蒸馏
+combustion	燃烧
+test paper 	试纸
+reagent 	试剂
+periodic table 	周期表
+hydrogen 	氢
+oxygen 	氧
+nitrogen 	氮
+helium 	氦
+carbon 	碳
+calcium 	钙
+silicon 	硅
+sulfur 	硫
+iodine 	碘
+radium	镭
+atom 原子
+nucleus 原子核
+electron 电子
+neutron 中子
+proton 质子
+molecule 分子
+particle 粒子

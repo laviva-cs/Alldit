@@ -1,0 +1,17 @@
+architect 	建筑学家 架构师
+building material 	建筑材料
+planetarium 	天文馆
+gas station 	加油站
+office building 	写字楼
+cathedral 	大教堂
+the Statue of Liberty 	自由女神像
+sphinx 	狮身人面像
+castle 	城堡
+repair person 	修理工
+skyscraper 	摩天楼
+aquarium 	水族馆
+archives 	档案馆
+wing 	侧楼
+mosque 	清真寺
+the Triumphal Arch 	凯旋门
+pyramid 	金字塔

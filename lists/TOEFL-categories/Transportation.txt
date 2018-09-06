@@ -1,0 +1,17 @@
+long distance train 	长途列车
+platform 	站台
+ticket 	罚单
+non-stop train 	直达列车
+rush hour 	高峰期
+intersection 	交叉路口
+wear and tear 	磨损
+flyover 	立交桥
+overspeed 	超速
+out-of-service 	废气，停用
+public transportation 	公共运输
+pavement, sidewalk 	人行道
+road maintenance 	道路养护
+parking meter 	停车计价器
+uniform motion 	匀速运动
+acceleration 	加速度
+power 	功率

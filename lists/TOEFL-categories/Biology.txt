@@ -1,0 +1,57 @@
+amphibian	两栖类的
+anemone	海葵
+antenna	触角，天线
+antelope	羚羊
+aphid	蚜虫
+beluga	白鲸
+bill	鸟嘴
+bipedal	两足动物的
+genetic	engineering	基因工程
+amphibian	两栖动物
+rodent	啮齿动物
+invertebrate	无脊椎动物
+reptile	爬行动物
+herbivore	食草动物
+parasitic	animal	寄生动物
+cold-blooded	animal	冷血动物
+respiratory	system	呼吸系统
+digestive	system	消化系统
+reproductive	system	生殖系统
+solitary	独居
+hibernation	冬眠
+evolution	进化
+adaptation	适应
+variation	变异
+chlorophyll	叶绿素
+annual	plant	一年生植物
+mammal	哺乳动物
+vertebrate	脊椎动物
+protozoa	原生动物
+carnivore	食肉动物
+ruminant	反刍动物
+warm-blooded	animal	温血动物
+rare	animal	稀有动物
+circulatory	system	循环系统
+excretory	system	排泄系统
+hormonal	system	内分泌系统
+social	群居
+bio-diversity	生物多样性
+darwinism	达尔文主义
+metamorphosis	变态，变形
+mutation	变种
+photosynthesis	光合作用
+perennial	plant	多年生植物
+antibody	抗体
+immunity	免疫
+vaccine	疫苗
+bacteria	细菌
+inflection	传染，感染
+microbe	微生物
+disinfection	消毒
+toxin	毒素
+fungus(fungi)	真菌
+fermentation	发酵
+microorganism	微生物
+virus	病毒
+sterilization	灭菌
+food chain	食物链

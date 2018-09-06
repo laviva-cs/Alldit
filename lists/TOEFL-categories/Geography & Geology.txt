@@ -1,0 +1,59 @@
+continental drift theory 	大陆漂移
+mantle 	地幔
+stratum 	地层
+outer core 	外核
+volcanic 	火山岩
+quartzite 	石英岩
+sedimentary rock 	沉积岩
+continent 	大陆
+the Northern Hemisphere 	北半球
+subcontinent 	次大陆
+time zone 	时区
+tropic of Cancer 	北回归线
+longitude 	经度
+meridian 	子午线
+the South Pole 	南极
+hillside, mountain slope 	山坡
+cliff 	山崖
+valley 	山谷
+peninsula 	半岛
+archipelago 	群岛
+delta 	三角洲
+lower reaches 	下游
+glacier 	冰川
+swamp	沼泽
+aquifer 	蓄水层
+vegetation 	植被
+volcano 	火山
+dormant volcano 	休眠火山
+magnitude 	地震震级
+continental crust 	大陆地壳
+core 	地核
+crust 	地壳
+inner core 	内核
+plate 	板块
+limestone 	石灰岩
+granite 	花岗岩
+geologic survey 	地质调查
+continental shelf 	大陆架
+the Southern Hemisphere 	南半球
+international Date Line 	国际日期变更线
+Greenwich Mean Time 	格林尼治时间
+Tropic of Capricorn 	南回归线
+latitude 	纬度
+the North Pole 	北极
+the Antarctic Continent 	南极洲
+desert 	沙漠
+grand Canyon 	大峡谷
+basin 	盆地
+coral island	珊瑚岛
+coastline 	海岸线
+upper reaches 	上游
+tributary 	支流
+deposit 	沉积
+spring, fountain 	泉水
+iceberg 	冰山
+tropical rain forest 	热带雨林
+volcano eruption 	火山爆发
+earthquake 	地震
+seismic wave 	地震波

@@ -1,0 +1,36 @@
+Meteorology 	气象学
+meteorological station 	气象站
+stratosphere 	平流层
+troposphere 对流层
+warm air mass 	热气团
+humidity 	湿度
+monsoon 	季风
+drizzle 	细雨
+blizzard 	暴风雪
+frost	霜
+nephanalysis 	云层分析，卫星云图
+stratus 	层云
+convection 	对流
+wind scale 	风级
+long-range forecast 	长期预报
+meteorologist 	气象学家
+atmosphere 	大气层
+cold front 	冷锋
+temperature 	温度
+sandstorm 	沙暴
+breeze 	微风
+torrential rain 	暴雨
+hail 	冰雹
+thunder 	雷
+wind velocity 	风速
+wind direction 	风向
+numerical weather prediction 	数值天气预报
+carbon dioxide release 	二氧化碳排放
+upper atmosphere 	上层大气
+purify 	净化
+acid rain 	酸雨
+sewage disposal 	污水处理
+waste disposal 	废物处理
+environment protection 	环境保护
+precipitation
+barometric pressure	气压

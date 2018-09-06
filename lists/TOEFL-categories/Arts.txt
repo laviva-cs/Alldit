@@ -1,0 +1,83 @@
+classical music 	古典音乐
+symphony 	交响乐
+band music 	管乐
+violin 	小提琴
+cello 	大提琴
+horn 	圆号
+keyboard instruments 	键盘
+vocal music 	声乐
+sonata 	奏鸣曲
+solo 	独奏，独唱
+conduction	指挥
+accompaniment 	伴奏
+volume 	音量
+harmony 	和声
+rest 	休止
+folk music 	民间音乐
+rock and roll 	摇滚乐
+instrument music 	弦乐
+viola 	中提琴
+harp 	竖琴
+clarinet 	单簧管
+percussion instruments 	打击乐器
+prelude 	序曲
+epilogue 	尾声
+lullaby 	催眠曲
+concerto 	协奏曲
+serenade 	小夜曲
+duet 	二重唱
+podium 	指挥台
+quality 	音质
+chord 	和弦
+time 	节拍
+portrait 	肖像画
+panorama	全景画，全景照片
+sketch 	素描
+calligraphy 	书法
+paste 	裱糊
+impressionistic style 	印象派风格
+perspective 	透视画法
+oil painting 	油画
+landscape painting 	山水画
+poster 	招贴画
+pastel drawing 	彩粉画
+autography 	真迹
+framing 	装框
+imitating 	临摹
+art gallery 	美术馆
+choreography 	舞台舞蹈
+technique 	技巧，表演法
+rhythm 	节奏
+improvisation 	即席创作
+artistic 	艺术的，风雅的
+integrity 	正直，诚实
+creative 	创造性的
+creativity 	创造力
+unique 	唯一的，独特的
+uniqueness 	独特性
+photography 	摄影，摄影术
+sculpture 	雕刻，雕塑品
+painting 	着色，绘画
+intuitive 	直觉的
+features 	面貌的一部分，特征，容貌
+characteristics 	特征，特有的
+rigid 	刚硬的，刚性的
+flexible 	柔韧的，灵活的
+classical 	古典的，正统派的
+contemporary 	同时代的人，当代的
+theme 	主题，主题曲，主旋律
+self-expression 	自我表现
+developing 	冲洗
+foreground 	前景
+high definition 	高清晰度
+out of focus 	调焦不准
+instant camera 	一次成像照相机
+tripod 	三角架
+photographer 	摄影家
+snap shot 	快照
+enlarge 	放大
+background 	背景
+close-up	 特写
+exposure 	曝光
+camera lens 	相机镜头
+darkroom 	暗室

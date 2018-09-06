@@ -1,0 +1,30 @@
+alliteration 	头韵
+apophthegm = apothegm  	格言 箴言
+biographer 	传记作者
+byword 	格言，谚语，绰号
+epic 	史诗
+pastoral 	田园诗
+prose 	散文
+autobiography 	传记
+narrative prose 	叙述性散文
+essay	 随笔
+ballad 	民谣
+fiction 	小说
+fairy tale 	童话
+proverb 	谚语
+leading character	主人公
+literary studies 	文学研究
+diary 	日记
+editorial 	社论
+descriptive prose 	描写性散文
+poetry 	诗歌
+allegory 	寓言
+legend 	传说
+model 	人物原型
+main plot 	主要情节
+prologue 	序言
+literary criticism 	文学批评
+schools of literature 	文学流派
+realism 	现实主义
+futurism 	未来主义
+aestheticism 	唯美主义
