@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
-
+import os
 import re
+import urllib
 import xml.etree.cElementTree as ElementTree
 
 from abc import ABCMeta, abstractmethod, abstractproperty
@@ -51,7 +52,7 @@ class MWApiWrapper(metaclass=ABCMeta):
     pass
   
   @abstractmethod
-  def parse_xml(root, word):
+  def parse_xml(self, root, word):
     pass
   
   def request_url(self, word):
@@ -72,8 +73,14 @@ class MWApiWrapper(metaclass=ABCMeta):
     return ("{0}/xml/{1}").format(self.base_url, qstring)
   
   def lookup(self, word):
-    response = self.urlopen(self.request_url(word))
-    data = response.read()
+    file = 'bin/' + word + '.xml'
+    if not os.path.isfile(file):
+      url = self.request_url(word)
+      urllib.request.urlretrieve(url, file)
+    f = open(file, encoding='utf-8')
+    data = f.read()
+    f.close()
+    
     try:
       root = ElementTree.fromstring(data)
     except ElementTree.ParseError:
@@ -88,7 +95,7 @@ class MWApiWrapper(metaclass=ABCMeta):
     suggestions = root.findall("suggestion")
     if suggestions:
       suggestions = [s.text for s in suggestions]
-      raise WordNotFoundException(word, suggestions)
+      return self.lookup(suggestions[0])
     
     return self.parse_xml(root, word)
 
@@ -98,10 +105,14 @@ class LearnersDictionary(MWApiWrapper):
   
   def parse_xml(self, root, word):
     entries = root.findall("entry")
-    return "<br />————————<br />".join(list([self.generateEntry(entry) for entry in entries]))
+    results = list([self.generateEntry(entry) for entry in entries])
+    return "<br />————————<br />".join([result[0] for result in results]), results[0][1], results[0][2]
   
   def generateEntry(self, entry):
     doc, tag, text = Doc().tagtext()
+    
+    wordsToHide = []
+    sounds = []
     
     functionColors = {
       'noun': '#cc44aa',
@@ -153,25 +164,28 @@ class LearnersDictionary(MWApiWrapper):
     
     def workOnSound(s):
       for wav in s:
-        with tag('a', href=build_sound_url(wav.text)):
+        url = build_sound_url(wav.text)
+        with tag('a', href=url):
           with tag('img',
                    src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAi0lEQVQokWNgQAYyQFzGsIJBnwED8DNcBpK+DM8YfjMUokqxMRxg+A9m8TJsBLLSEFKMDCuBAv/hCncxfGWQhUn2gaVAktkMXkBSHmh0OwNU8D9csoHhO4MikN7BcAGb5H+GYiDdCTQYq2QubkkkY/E6CLtXdiJ7BTMQMnAHXxFm6IICvhwY8AYQLgCw2U9d90B8BAAAAABJRU5ErkJggg=='):
             pass
+        space()
     
     def workOnArt(a):
-      try:
-        artref = a.find('artref')
-        caption = a.find('capt')
-        width, height = a.find('dim').text.split(',')
-        id = artref.get('id')
-      except:
-        return
-      
-      with tag('p', style='visibility:hidden'):
-        with tag('img', src=build_illustration_url(id), style='width: %f; height: %f' % (float(width), float(height))):
-          pass
-        with tag('h2'):
-          plainText(caption)
+      pass
+      # try:
+      #   artref = a.find('artref')
+      #   caption = a.find('capt')
+      #   width, height = a.find('dim').text.split(',')
+      #   id = artref.get('id')
+      # except:
+      #   return
+      #
+      # with tag('p'):
+      #   with tag('img', src=build_illustration_url(id), style='width: %f; height: %f' % (float(width), float(height))):
+      #     pass
+      #   with tag('h2'):
+      #     plainText(caption)
     
     def workOnFunctionLabel(fl):
       space()
@@ -186,7 +200,7 @@ class LearnersDictionary(MWApiWrapper):
         
         for child in node:
           traverse(child)
-
+    
     tagTransform = {
       'inf': ('sub', ''),
       'sup': ('span', 'font-size:'),
@@ -251,7 +265,7 @@ class LearnersDictionary(MWApiWrapper):
       'un': lambda: plainText('\n--'),
       'dx': lambda: plainText('\n--'),
       'ca': lambda: plainText('\n--'),
-      'sx': lambda : plainText('sym: '),
+      'sx': lambda: plainText('sym: '),
       'snote': lambda: doc.asis(' &#x269d; '),
       'pr': lambda: plainText('/'),
       'vr': lambda: plainText('('),
@@ -290,10 +304,10 @@ class LearnersDictionary(MWApiWrapper):
     def traverse(root):
       lookup = alias.get(root.tag, root.tag)
       
-      before = beforeTag.get(lookup, beforeTag.get(root.tag, lambda: None))
-      after = afterTag.get(lookup, afterTag.get(root.tag, lambda: None))
-      front = frontOfTag.get(lookup, frontOfTag.get(root.tag, lambda: None))
-      rear = rearOfTag.get(lookup, rearOfTag.get(root.tag, lambda: None))
+      before = beforeTag.get(root.tag, beforeTag.get(lookup, lambda: None))
+      after = afterTag.get(root.tag, afterTag.get(lookup, lambda: None))
+      front = frontOfTag.get(root.tag, frontOfTag.get(lookup, lambda: None))
+      rear = rearOfTag.get(root.tag, rearOfTag.get(lookup, lambda: None))
       
       before()
       
@@ -312,5 +326,24 @@ class LearnersDictionary(MWApiWrapper):
       after()
     
     traverse(entry)
-    print(doc.getvalue())
-    return doc.getvalue()
+    
+    hw = entry.find('hw')
+    if hw is not None:
+      wordsToHide.append(re.sub('\\*', '', hw.text).strip())
+    
+    s = entry.find('sound')
+    if s is not None:
+      for wav in s.findall('wav'):
+        sounds.append(build_sound_url(wav.text))
+    
+    for inf in entry.findall('in'):
+      hw = entry.find('if')
+      if hw is not None:
+        wordsToHide.insert(0, re.sub('\\*', '', hw.text).strip())
+      
+      s = entry.find('sound')
+      if s is not None:
+        for wav in s.findall('wav'):
+          sounds.append(build_sound_url(wav.text))
+    
+    return doc.getvalue(), wordsToHide, sounds

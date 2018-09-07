@@ -34,7 +34,7 @@
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="startPage">
         <property name="styleSheet">
@@ -209,6 +209,9 @@ p, li { white-space: pre-wrap; }
                  <property name="text">
                   <string notr="true">pause</string>
                  </property>
+                 <property name="autoDefault">
+                  <bool>false</bool>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -216,12 +219,18 @@ p, li { white-space: pre-wrap; }
                  <property name="text">
                   <string notr="true">settings</string>
                  </property>
+                 <property name="autoDefault">
+                  <bool>false</bool>
+                 </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="backButton">
                  <property name="text">
                   <string notr="true">back</string>
+                 </property>
+                 <property name="autoDefault">
+                  <bool>false</bool>
                  </property>
                 </widget>
                </item>
@@ -254,42 +263,11 @@ p, li { white-space: pre-wrap; }
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections>
-  <connection>
-   <sender>textBrowser</sender>
-   <signal>anchorClicked(QUrl)</signal>
-   <receiver>MainDialog</receiver>
-   <slot>anchor(QUrl)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1021</x>
-     <y>177</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1141</x>
-     <y>131</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>treeWidget</sender>
-   <signal>itemDoubleClicked(QTreeWidgetItem*,int)</signal>
-   <receiver>MainDialog</receiver>
-   <slot>list(QTreeWidgetItem*,int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>226</x>
-     <y>170</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>363</x>
-     <y>-23</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>anchor(QUrl)</slot>
   <slot>list(QTreeWidgetItem*,int)</slot>
+  <slot>pauseAudit()</slot>
+  <slot>acceptAnswers()</slot>
  </slots>
 </ui>
