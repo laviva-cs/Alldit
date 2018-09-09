@@ -9,6 +9,7 @@ from merriam_webster.api import (LearnersDictionary, WordNotFoundException)
 from random import shuffle
 from collections import deque
 import time
+from pymongo import MongoClient
 
 qtCreatorFile = "MainDialog.ui"
 
@@ -38,9 +39,10 @@ class MyApp(QDialog, Ui_MainWindow):
     self.treeWidget.setColumnCount(2)
     self.treeWidget.setHeaderLabels(["Word List", "Description"])
     
-    self.treeWidget.itemDoubleClicked.connect(self.list)
+    self.treeWidget.itemDoubleClicked.connect(self.selectList)
+    self.client = MongoClient('localhost', 27017)
     
-    self.initWordLists(self.treeWidget)
+    self.initWordLists()
     
     self.c = Communicate()
     self.c.setHtml.connect(self.textBrowser.setHtml)
@@ -50,19 +52,77 @@ class MyApp(QDialog, Ui_MainWindow):
     self.lineEdit.returnPressed.connect(self.acceptAnswers)
     
     self.stackedWidget.setCurrentIndex(0)
+    
+    self.word = None
+    self.list = None
+  
+  def markWord(self, succeed):
+    totalTime = self.accumulatedTime + time.time() - self.startTime
+    
+    db = self.client.alldit
+    
+    found = True
+    doc = db.words.find_one({"_id": self.word})
+    if doc is None:
+      found = False
+      doc = {
+        '_id': self.word,
+        "auditCount": 0,
+        "failCount": 0,
+        "firstAudit": self.startTime,
+        "winningStreak": 0,
+        "lists": [],
+        "audio": [],
+        "totalTime": 0
+      }
+    
+    doc['auditCount'] += 1
+    doc['failCount'] += 0 if succeed else 1
+    doc['lastAudit'] = self.startTime
+    doc['winningStreak'] = doc['winningStreak'] + 1 if succeed else 0
+    doc['lists'] = list(set(doc['lists'] + [self.list]))
+    doc['audio'] = list(set(doc['audio'] + list(self.sounds)))
+    doc['totalTime'] += totalTime
+    
+    if found:
+      del doc['_id']
+      db.words.replace_one({"_id": self.word}, doc)
+    else:
+      db.words.insert_one(doc)
+    
+    found = True
+    doc = db.lists.find_one({"_id": self.list})
+    if doc is None:
+      found = False
+      doc = {
+        '_id': self.list,
+        "auditCount": 0,
+        "failCount": 0,
+        "totalTime": 0
+      }
+    
+    doc['auditCount'] += 1
+    doc['failCount'] += 0 if succeed else 1
+    doc['totalTime'] += totalTime
+    
+    if found:
+      del doc['_id']
+      db.lists.replace_one({"_id": self.list}, doc)
+    else:
+      db.lists.insert_one(doc)
   
   def markAsFail(self):
-    pass  # TODO
+    self.markWord(False)
   
   def markAsSucceed(self):
-    pass  # TODO
+    self.markWord(True)
   
   def playOneSound(self):
     if len(self.sounds):
       self.playAudio(self.sounds[0])
       self.sounds.rotate(-1)
     self.timer.setSingleShot(True)
-    self.timer.start(3000)
+    self.timer.start(5000)
   
   def auditNext(self):
     if len(self.words) == 0:
@@ -70,7 +130,7 @@ class MyApp(QDialog, Ui_MainWindow):
       QMessageBox.about(self, "Word list complete", "Con!! Word list is COMPLETED. Try another? ")
       return
     
-    if hasattr(self, 'wrong'):
+    if self.word is not None:
       if self.wrong > 0:
         self.markAsFail()
       else:
@@ -80,24 +140,34 @@ class MyApp(QDialog, Ui_MainWindow):
     self.word = self.words.pop()
     self.wrong = 0
     self.startTime = time.time()
+    self.accumulatedTime = 0
     
     self.html, self.wordsToHide, self.sounds = self.dict.lookup(self.word)
-    self.sounds = deque(self.sounds)
+    self.sounds = deque(set(self.sounds))
     self.refreshDisplay()
     
     self.playOneSound()
   
   def back(self):
+    if self.word is not None and self.wrong >= 0:
+      self.markAsFail()
+    
+    self.word = None
+    self.list = None
     self.c.setHtml.emit("")
     self.stackedWidget.setCurrentIndex(0)
+    self.timer.stop()
+    self.initWordLists()
   
   def pauseAudit(self):
     if self.timer.isActive():
       self.timer.stop()
+      self.accumulatedTime += time.time() - self.startTime
       self.lineEdit.setDisabled(True)
       self.pauseButton.setText('resume')
     else:
-      self.timer.start(3000)
+      self.startTime = time.time()
+      self.timer.start(5000)
       self.pauseButton.setText('pause')
       self.lineEdit.setDisabled(False)
   
@@ -118,19 +188,22 @@ class MyApp(QDialog, Ui_MainWindow):
     html = str(self.html)
     for wordToHide in self.wordsToHide:
       if reveal:
-        html = re.sub('·*'.join(wordToHide), '<span style="color:red;font-style: italic">%s</span>' % wordToHide, html)
+        html = re.sub('([^<"\'])' + '·?'.join(wordToHide) + '([^>"\'=])',
+                      '\\1<span style="color:red;font-style: italic">%s</span>\\2' % wordToHide, html,
+                      flags=re.IGNORECASE)
       else:
-        html = re.sub('·*'.join(wordToHide), '__??__', html)
+        html = re.sub('([^<"\'])' + '·?'.join(wordToHide) + '([^>"\'=])', '\\1__??__\\2', html, flags=re.IGNORECASE)
     self.c.setHtml.emit(html)
   
-  def list(self, item, column):
+  def selectList(self, item, column):
     file = ''
     while item is not None:
       file = item.data(0, Qt.DisplayRole) + '/' + file
       item = item.parent()
     
-    file = 'lists/' + file[0:-1]
+    file = file[0:-1]
     self.list = file
+    file = 'lists/' + file
     f = open(file, encoding='utf-8')
     self.words = [name.strip() for name in f.readlines()]
     f.close()
@@ -142,9 +215,13 @@ class MyApp(QDialog, Ui_MainWindow):
       self.stackedWidget.setCurrentIndex(1)
       self.auditNext()
   
-  def initWordLists(self, tree):
+  def initWordLists(self):
+    tree = self.treeWidget
+    tree.clear()
+    
     pathToItem = {}
     pathToItem['lists'] = tree
+    db = self.client.alldit
     
     for root, dirs, files in os.walk('lists'):
       for dir in dirs:
@@ -156,7 +233,16 @@ class MyApp(QDialog, Ui_MainWindow):
       for file in files:
         item = QTreeWidgetItem(pathToItem[root])
         item.setText(0, file)
-        item.setText(1, "")
+        
+        desc = "New word list! "
+        path = (root.replace('\\', '/') + '/' + file)[len('lists/'):]
+        
+        doc = db.lists.find_one({"_id": path})
+        if doc is not None:
+          desc = "Total auditing: %d, Total failure: %d, Total time used: %.2f seconds" % \
+                 (doc['auditCount'], doc['failCount'], doc['totalTime'])
+        
+        item.setText(1, desc)
     
     tree.expandAll()
     for i in range(2):
@@ -173,8 +259,7 @@ class MyApp(QDialog, Ui_MainWindow):
       self.lookUpEntries([word])
   
   def playAudio(self, url):
-    audioFile = url[url.rfind('/') + 1:]
-    file = 'bin/' + audioFile
+    file = 'bin/' + url[url.rfind('/') + 1:]
     if not os.path.isfile(file):
       urllib.request.urlretrieve(url, file)
     
@@ -189,6 +274,27 @@ class MyApp(QDialog, Ui_MainWindow):
     self.c.setHtml.emit(
       "<br />————————<br />".join([self.dict.lookup(entry)[0] for entry in entries])
     )
+  
+  def preDownload(self, lists):
+    for list in lists:
+      f = open('lists/' + list + '.txt', encoding='utf-8')
+      words = [name.strip() for name in f.readlines()]
+      f.close()
+      
+      for word in words:
+        file = 'bin/' + word + '.xml'
+        if not os.path.isfile(file):
+          try:
+            html, toHide, sounds = self.dict.lookup(word)
+            for url in sounds:
+              try:
+                file = 'bin/' + url[url.rfind('/') + 1:]
+                if not os.path.isfile(file):
+                  urllib.request.urlretrieve(url, file)
+              except:
+                print('!! sound %s download failed! for word %s' % (url, word))
+          except:
+            print('!! word %s failed! in list %s' % (word, list))
 
 
 if __name__ == "__main__":
@@ -196,5 +302,6 @@ if __name__ == "__main__":
     os.makedirs('bin')
   app = QtWidgets.QApplication(sys.argv)
   window = MyApp()
+  # window.preDownload(['CET4&6', 'TOEFL', 'GRE', 'GRE-3000'])
   window.show()
   sys.exit(app.exec_())
