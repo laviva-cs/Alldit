@@ -18,6 +18,7 @@ Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
 class Communicate(QObject):
   setHtml = pyqtSignal(str)
+  next = pyqtSignal()
 
 
 class MyApp(QDialog, Ui_MainWindow):
@@ -46,6 +47,7 @@ class MyApp(QDialog, Ui_MainWindow):
     
     self.c = Communicate()
     self.c.setHtml.connect(self.textBrowser.setHtml)
+    self.c.next.connect(self.acceptAnswers)
     
     self.pauseButton.clicked.connect(self.pauseAudit)
     self.backButton.clicked.connect(self.back)
@@ -121,13 +123,20 @@ class MyApp(QDialog, Ui_MainWindow):
     if len(self.sounds):
       self.playAudio(self.sounds[0])
       self.sounds.rotate(-1)
+      
+    if not self.hideWord:
+      if len(self.sounds):
+        self.sounds.pop()
+      else:
+        self.c.next.emit()
+        
     self.timer.setSingleShot(True)
     self.timer.start(5000)
   
   def auditNext(self):
     if len(self.words) == 0:
       self.back()
-      QMessageBox.about(self, "Word list complete", "Con!! Word list is COMPLETED. Try another? ")
+      QMessageBox().about(self, "Word list complete", "Con!! Word list is COMPLETED. Try another? ")
       return
     
     if self.word is not None:
@@ -143,6 +152,8 @@ class MyApp(QDialog, Ui_MainWindow):
     self.accumulatedTime = 0
     
     self.html, self.wordsToHide, self.sounds = self.dict.lookup(self.word)
+    if not self.hideWord: self.wordsToHide = []
+    
     self.sounds = deque(set(self.sounds))
     self.refreshDisplay()
     
@@ -172,7 +183,11 @@ class MyApp(QDialog, Ui_MainWindow):
       self.lineEdit.setDisabled(False)
   
   def acceptAnswers(self):
-    answers = re.compile(r'\s+').split(self.lineEdit.text())
+    try:
+      answers = re.compile(r'\s+').split(self.lineEdit.text())
+    except:
+      answers = []
+    
     for answer in answers:
       if answer in self.wordsToHide:
         self.wordsToHide.remove(answer)
@@ -186,13 +201,14 @@ class MyApp(QDialog, Ui_MainWindow):
   
   def refreshDisplay(self, reveal=False):
     html = str(self.html)
-    for wordToHide in self.wordsToHide:
-      if reveal:
-        html = re.sub('([^<"\'])' + '·?'.join(wordToHide) + '([^>"\'=])',
-                      '\\1<span style="color:red;font-style: italic">%s</span>\\2' % wordToHide, html,
-                      flags=re.IGNORECASE)
-      else:
-        html = re.sub('([^<"\'])' + '·?'.join(wordToHide) + '([^>"\'=])', '\\1__??__\\2', html, flags=re.IGNORECASE)
+    if self.hideWord:
+      for wordToHide in self.wordsToHide:
+        if reveal:
+          html = re.sub('([^<"\'])' + '·?'.join(wordToHide) + '([^>"\'=])',
+                        '\\1<span style="color:red;font-style: italic">%s</span>\\2' % wordToHide, html,
+                        flags=re.IGNORECASE)
+        else:
+          html = re.sub('([^<"\'])' + '·?'.join(wordToHide) + '([^>"\'=])', '\\1__??__\\2', html, flags=re.IGNORECASE)
     self.c.setHtml.emit(html)
   
   def selectList(self, item, column):
@@ -205,8 +221,10 @@ class MyApp(QDialog, Ui_MainWindow):
     self.list = file
     file = 'lists/' + file
     f = open(file, encoding='utf-8')
-    self.words = [name.strip() for name in f.readlines()]
+    self.words = [re.sub(u"[\u4e00-\u9fa5]+", "", name).strip() for name in f.readlines()]
     f.close()
+
+    self.hideWord = "TOEFL-categories" not in file
     
     if len(self.words) <= 0:
       QMessageBox.about(self, "Word list empty", "Word list %s is empty. Try another? " % file)

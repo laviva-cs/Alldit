@@ -106,8 +106,11 @@ class LearnersDictionary(MWApiWrapper):
   def parse_xml(self, root, word):
     entries = root.findall("entry")
     results = list([self.generateEntry(entry) for entry in entries])
-    return "<br />————————<br />".join([result[0] for result in results]), results[0][1], results[0][2]
-  
+    try:
+      return "<br />————————<br />".join([result[0] for result in results]), results[0][1], results[0][2]
+    except:
+      return "No dictionary entries found for %s! " % (word)
+    
   def generateEntry(self, entry):
     doc, tag, text = Doc().tagtext()
     
@@ -126,7 +129,9 @@ class LearnersDictionary(MWApiWrapper):
     
     infoLable = ('span', 'font-weight:bold;color:#ffffff; background-color: #8b7a14')
     bold = ('span', 'font-weight:bold')
+    boldDiv = ('div', 'font-weight:bold')
     plain = ('span', 'font-weight:normal')
+    plainDiv = ('div', 'font-weight:normal')
     italic = ('i', '')
     plainIndented = ('div', 'background-color:rgb(253, 254, 236);font-weight:normal;margin-left:10px')
     
@@ -222,7 +227,7 @@ class LearnersDictionary(MWApiWrapper):
       
       'vr': plain,
       'in': plain,
-      'def': plain,
+      'def': plainDiv,
       'ca': plain,
       'tag': plain,
       'sd': plain,
@@ -233,7 +238,7 @@ class LearnersDictionary(MWApiWrapper):
       'va': bold,
       'phrase': bold,
       'pr': bold,
-      'dt': bold,
+      'dt': boldDiv,
       
       'sound': workOnSound,
       'art': workOnArt,
@@ -336,10 +341,10 @@ class LearnersDictionary(MWApiWrapper):
       for wav in s.findall('wav'):
         sounds.append(build_sound_url(wav.text))
     
-    for inf in entry.findall('in'):
-      hw = entry.find('if')
-      if hw is not None:
-        wordsToHide.insert(0, re.sub('\\*', '', hw.text).strip())
+    for inflection in entry.findall('in'):
+      word = inflection.find('if')
+      if word is not None:
+        wordsToHide.insert(0, re.sub('\\*', '', word.text).strip())
       
       s = entry.find('sound')
       if s is not None:
