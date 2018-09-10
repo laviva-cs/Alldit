@@ -106,6 +106,18 @@ class LearnersDictionary(MWApiWrapper):
   def parse_xml(self, root, word):
     entries = root.findall("entry")
     results = list([self.generateEntry(entry) for entry in entries])
+    
+    shouldBeHead = None
+    i = 0
+    for entry in entries:
+      if entry.get("id") == word:
+        shouldBeHead = results[i]
+      i += 1
+    
+    if shouldBeHead:
+      results.remove(shouldBeHead)
+      results.insert(0, shouldBeHead)
+    
     try:
       return "<br />————————<br />".join([result[0] for result in results]), results[0][1], results[0][2]
     except:
@@ -178,19 +190,6 @@ class LearnersDictionary(MWApiWrapper):
     
     def workOnArt(a):
       pass
-      # try:
-      #   artref = a.find('artref')
-      #   caption = a.find('capt')
-      #   width, height = a.find('dim').text.split(',')
-      #   id = artref.get('id')
-      # except:
-      #   return
-      #
-      # with tag('p'):
-      #   with tag('img', src=build_illustration_url(id), style='width: %f; height: %f' % (float(width), float(height))):
-      #     pass
-      #   with tag('h2'):
-      #     plainText(caption)
     
     def workOnFunctionLabel(fl):
       space()
@@ -200,7 +199,8 @@ class LearnersDictionary(MWApiWrapper):
       space()
     
     def workOnReference(node):
-      with tag('a', href=build_sound_url('http://lookup.dict/' + node.text)):
+      if node.text is None: return
+      with tag('a', href='http://lookup.dict/' + node.text):
         plainText(node.text)
         
         for child in node:
@@ -248,7 +248,7 @@ class LearnersDictionary(MWApiWrapper):
       
       'bnote': ('div', 'font-weight:600; background-color: #8b7a1455'),
       'snote': ('p', 'background-color: #8b7a14; margin-left:10px'),
-      'entry': ('p', 'margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; '
+      'entry': ('div', 'margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; '
                      'text-indent:0px;font-family:\'SimSun\'; font-size:9pt; font-weight:normal; font-style:normal'),
       
       'hw': bold,
