@@ -20,7 +20,7 @@ English | [简体中文](./README-zh_CN.md)
 - MacOS
 
 ## 📦 Install
-- Install git, Python 3 and pip 3 on your OS, then
+- Install MongoDB server, git, Python 3 and pip 3 on your OS, then
 ```bash
 git clone https://github.com/laviva-cs/Alldit
 cd Alldit
@@ -32,9 +32,8 @@ python3 ./main.py
 When started, the GUI is shown like the following: 
 
 <p align="center">
-<img width="200" src="./screenshots/lists.PNG"/>
+<img width="500" src="./screenshots/lists.PNG"/>
 </p>
-
 
 Word lists are located under *lists/*, and you can add arbitrarily many custom word lists. 
 All lists are equal, except the word lists under *TOEFL-categories/* and *show/*. 
@@ -46,23 +45,23 @@ Double click a word list, then you will enter the auditing environment. The ques
 As you may also noticed, the variants, or the inflections of this word is also hidden. 
 
 <p align="center">
-<img width="200" src="./screenshots/question.PNG"/>
+<img width="500" src="./screenshots/question.PNG"/>
 </p>
-<p style="text-align: center;" >  Word "test" and its plural form "tests" is hidden. </p><br/>
+<p align="center" >  Word "test" and its plural form "tests" are hidden. </p><br/>
 
 To answer the question, you simply enter the hidden words and press enter, and you can separate different words by spaces to answer in batch. 
 - The correctly answered words or inflections are revealed. The others are still hidden. 
 <p align="center">
-<img width="200" src="./screenshots/inflections.PNG"/>
+<img width="500" src="./screenshots/inflections.PNG"/>
 </p>
-<p style="text-align: center;" >  After "test" is typped in, the plural form "tests" is still hidden. </p><br/>
+<p align="center" >  After "test" is typped in, the plural form "tests" is still hidden. </p><br/>
 
 - If all hidden words are correctly answered, the auditing moves forward for a new word. 
 - Or if the wrong answers add up to 3 times, the hidden words are displayed in red and the auditee should type all the correct answers to get the next word. 
 <p align="center">
-<img width="200" src="./screenshots/error-reveal.PNG"/>
+<img width="500" src="./screenshots/error-reveal.PNG"/>
 </p>
-<p style="text-align: center;" > 3 errors lead to a reveal for all remained hidden words. </p><br/>
+<p align="center" > 3 errors lead to a reveal for all remained hidden words. </p><br/>
 
 The audios are played every 15 seconds, to help you associate the pronounciation with the word and the word itself. 
 
