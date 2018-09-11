@@ -243,10 +243,10 @@ class MyApp(QDialog, Ui_MainWindow):
     unmet = set()
     
     for word in self.words:
-      doc = db.words.find_one({"_id": self.word})
+      doc = db.words.find_one({"_id": word})
       if doc is None:
         unmet.add(word)
-      elif doc.winningStreak == 0:
+      elif doc["winningStreak"] == 0:
         lastWrong.add(word)
       else:
         lastCorrect.add(word)

@@ -79,6 +79,7 @@ class MWApiWrapper(metaclass=ABCMeta):
       urllib.request.urlretrieve(url, file)
     f = open(file, encoding='utf-8')
     data = f.read()
+    data = data.replace("*encenc*es</if>", "*enc*es</if>")
     f.close()
     
     try:
