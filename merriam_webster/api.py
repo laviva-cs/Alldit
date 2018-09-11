@@ -121,7 +121,7 @@ class LearnersDictionary(MWApiWrapper):
     try:
       return "<br />————————<br />".join([result[0] for result in results]), results[0][1], results[0][2]
     except:
-      return "No dictionary entries found for %s! " % (word)
+      return "No dictionary entries found for %s! " % (word), [], []
     
   def generateEntry(self, entry):
     doc, tag, text = Doc().tagtext()

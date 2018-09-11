@@ -29,6 +29,48 @@ python3 ./main.py
 ```
 
 ## 🔨 Usage
+When started, the GUI is shown like the following: 
+
+<p align="center">
+<img width="200" src="./screenshots/lists.PNG"/>
+</p>
+
+
+Word lists are located under *lists/*, and you can add arbitrarily many custom word lists. 
+All lists are equal, except the word lists under *TOEFL-categories/* and *show/*. 
+When these lists are selected, the words are not hidden, and the displayed words will be changed every 15 seconds. 
+
+The statistics are stored in local MongoDB server, and the summaries are displayed for each list. 
+
+Double click a word list, then you will enter the auditing environment. The questions are shown as the word being audited is hidden and replaced by *__??__*
+As you may also noticed, the variants, or the inflections of this word is also hidden. 
+
+<p align="center">
+<img width="200" src="./screenshots/question.PNG"/>
+</p>
+<p style="text-align: center;" >  Word "test" and its plural form "tests" is hidden. </p><br/>
+
+To answer the question, you simply enter the hidden words and press enter, and you can separate different words by spaces to answer in batch. 
+- The correctly answered words or inflections are revealed. The others are still hidden. 
+<p align="center">
+<img width="200" src="./screenshots/inflections.PNG"/>
+</p>
+<p style="text-align: center;" >  After "test" is typped in, the plural form "tests" is still hidden. </p><br/>
+
+- If all hidden words are correctly answered, the auditing moves forward for a new word. 
+- Or if the wrong answers add up to 3 times, the hidden words are displayed in red and the auditee should type all the correct answers to get the next word. 
+<p align="center">
+<img width="200" src="./screenshots/error-reveal.PNG"/>
+</p>
+<p style="text-align: center;" > 3 errors lead to a reveal for all remained hidden words. </p><br/>
+
+The audios are played every 15 seconds, to help you associate the pronounciation with the word and the word itself. 
+
+😉 Hope you enjoy! Still in beta version, please submit bugs as directed below: ⬇️
+
+## 🤝 Contributing
+
+All contributions are welcomed. You can submit any ideas as [pull requests](https://github.com/laviva-cs/Alldit/pulls) or as [issues](https://github.com/laviva-cs/Alldit/issues) :)
 
 ## 🔗 Links and credits
 - [Home page](https://github.com/laviva-cs/Alldit)
@@ -40,7 +82,3 @@ python3 ./main.py
 - [PyGame](https://www.pygame.org)
 - [Yattag](http://www.yattag.org/)
 - [Anki](https://ankiweb.net)
-
-## 🤝 Contributing
-
-All contributions are welcomed. You can submit any ideas as [pull requests](https://github.com/laviva-cs/Alldit/pulls) or as [issues](https://github.com/laviva-cs/Alldit/issues) :)

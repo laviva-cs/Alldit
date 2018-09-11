@@ -154,6 +154,9 @@ class MyApp(QDialog, Ui_MainWindow):
     self.html, self.wordsToHide, self.sounds = self.dict.lookup(self.word)
     if not self.hideWord: self.wordsToHide = []
     
+    try: self.wordsToHide = self.wordsToHide.replace("–", "-")
+    except: pass
+    
     self.sounds = deque(set(self.sounds))
     self.refreshDisplay()
     
@@ -184,21 +187,20 @@ class MyApp(QDialog, Ui_MainWindow):
   
   def acceptAnswers(self):
     text = self.lineEdit.text().strip()
-    try:
-      answers = set(re.compile(r'\s+').split(text))
-    except:
-      answers = set()
     
-    answers.add(text)
-    
-    for answer in answers.copy():
-      answers.add(answer.replace("-", "–"))
-    
-    for answer in answers:
-      if answer in self.wordsToHide:
-        self.wordsToHide.remove(answer)
-      else:
-        self.wrong += 1
+    if text in self.wordsToHide:
+      self.wordsToHide.remove(text)
+    else:
+      try:
+        answers = set(re.compile(r'\s+').split(text))
+      except:
+        answers = set()
+      
+      for answer in answers:
+        if answer in self.wordsToHide:
+          self.wordsToHide.remove(answer)
+        else:
+          self.wrong += 1
     
     self.refreshDisplay(self.wrong >= 3)
     
