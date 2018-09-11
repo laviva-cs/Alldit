@@ -1,8 +1,8 @@
 <h1 align="center">Alldit</h1>
 
-Help you audit words and phrases via English definitions and pronouncations! Comprehensive practices for your English! 
+Help you on dictations for words and phrases via English definitions and pronouncations! Comprehensive practices for your English! 
 
-Supported by: Merriam Webster dictionary API &amp; PyQt5 & MongoDB
+Supported by: Merriam Webster dictionary API & PyQt5 & MongoDB
 
 English | [简体中文](./README-zh_CN.md)
 
@@ -50,7 +50,7 @@ When these lists are selected, the words are not hidden, and the displayed words
 
 The statistics are stored in local MongoDB server, and the summaries are displayed for each list. 
 
-Double click a word list, then you will enter the auditing environment. The questions are shown as the word being audited is hidden and replaced by *__??__*
+Double click a word list, then you will enter the dictation environment. The questions are shown as the word being dictated is hidden and replaced by *__??__*
 As you may also noticed, the variants, or the inflections of this word is also hidden. 
 
 <p align="center">
@@ -65,8 +65,8 @@ To answer the question, you simply enter the hidden words and press enter, and y
 </p>
 <p align="center" >  After "test" is typped in, the plural form "tests" is still hidden. </p><br/>
 
-- If all hidden words are correctly answered, the auditing moves forward for a new word. 
-- Or if the wrong answers add up to 3 times, the hidden words are displayed in red and the auditee should type all the correct answers to get the next word. 
+- If all hidden words are correctly answered, the dictation moves forward for a new word. 
+- Or if the wrong answers add up to 3 times, the hidden words are displayed in red and the dictation taker should type all the correct answers to get the next word. 
 <p align="center">
 <img width="500" src="./screenshots/error-reveal.PNG"/>
 </p>
