@@ -20,12 +20,21 @@ English | [简体中文](./README-zh_CN.md)
 - MacOS
 
 ## 📦 Install
-- Install MongoDB server, git, Python 3 and pip 3 on your OS, then
+- Install [MongoDB server](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/), 
+[git](https://hackernoon.com/install-git-on-windows-9acf2a1944f0), [Python 3 and pip 3](https://docs.python.org/3/using/windows.html) to your OS and reboot.
+
+- Then exectuate the following commands in the place you want to install Alldit:
 ```bash
 git clone https://github.com/laviva-cs/Alldit
 cd Alldit
 pip3 install PyQt5 pymongo pygame
 python3 ./main.py
+```
+
+- For Windows users, direct to the folder containing mongod.exe, then run the following commands to add mongod as a system service and launch automatically on every reboot.
+```cmd
+mkdir d:\mongodb
+.\mongod.exe --install  --dbpath=D:\mongodb --logpath=D:\mongodb\log.txt
 ```
 
 ## 🔨 Usage
@@ -65,7 +74,7 @@ To answer the question, you simply enter the hidden words and press enter, and y
 
 The audios are played every 15 seconds, to help you associate the pronounciation with the word and the word itself. 
 
-😉 Hope you enjoy! Still in beta version, please submit bugs as directed below: ⬇️
+Hope you enjoy 😉! Still in beta version. Please submit bugs as directed below: ⬇️
 
 ## 🤝 Contributing
 

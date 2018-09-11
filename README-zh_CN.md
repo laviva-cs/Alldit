@@ -20,12 +20,22 @@
 - MacOS
 
 ## 📦 安装
-- 在你的操作系统上安装 MongoDB服务器、git、Python 3 和 pip 3，然后
-```bash
+- 在你的操作系统上安装 [MongoDB服务器](http://www.runoob.com/mongodb/mongodb-window-install.html)、
+[git](https://www.jianshu.com/p/414ccd423efc)、
+[Python 3 和 pip 3](https://blog.csdn.net/zhunianguo/article/details/53524792)，重新启动系统。
+
+- 在欲安装文件夹下[打开命令行窗口](http://huangqiqing123.iteye.com/blog/2395146)，逐行复制粘贴（命令行中击鼠标右键即可粘贴）以下命令：
+```cmd
 git clone https://github.com/laviva-cs/Alldit
 cd Alldit
 pip3 install PyQt5 pymongo pygame
-python3 ./main.py
+python3 main.py
+```
+
+- Windows 用户需要在mongod.exe同级目录下打开命令行窗口运行以下命令，将mongod加入系统服务，开机自动运行。
+```cmd
+mkdir d:\mongodb
+.\mongod.exe --install  --dbpath=D:\mongodb --logpath=D:\mongodb\log.txt
 ```
 
 ## 🔨 使用
@@ -61,7 +71,7 @@ python3 ./main.py
 
 音频每15秒播放一次，帮助你将发音和这个词联系起来，而不是和你偷偷写的汉语注音或者其它奇怪的东西联系起来。
 
-😉 祝顺利！仍然在不断修复bug。报错请按下文与我交流 ⬇️
+祝顺利😉！仍然在不断修复bug。报错请按下文与我交流 ⬇️
 
 ## 🤝 贡献代码
 让我们一起把 Alldit 全听全写 做好！欢迎以 [pull requests](https://github.com/laviva-cs/Alldit/pulls) 和 [issues](https://github.com/laviva-cs/Alldit/issues) 的方式提交你的想法 :)
