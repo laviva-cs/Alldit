@@ -2,7 +2,7 @@
 
 全英文环境的听写教练！全面夯实英语基础！
 
-支持库: Merriam Webster dictionary API &amp; PyQt5 & MongoDB
+支持库: Merriam Webster dictionary API & PyQt5 & MongoDB
 
 [English](./README.md) | 简体中文
 
@@ -44,7 +44,7 @@ mkdir d:\mongodb
 <img width="500" src="./screenshots/lists.PNG"/>
 </p>
 
-单词列表在*lists/*目录下，你可以任意添加自己的单词表。所有的单词表都是同等的。除了*TOEFL-categories/* and *show/*目录下的。这两个目录下的单词表不会隐藏单词，只是15秒循环播放。
+单词列表在*lists/*目录下，你可以任意添加自己的单词表。所有的单词表都是同等的。除了*TOEFL-categories/* 和 *show/* 目录下的。这两个目录下的单词表不会隐藏单词，只是15秒循环播放。
 
 统计信息在本地的MongoDB存储。初始界面显示统计概况。
 

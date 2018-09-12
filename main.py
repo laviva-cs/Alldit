@@ -147,6 +147,7 @@ class MyApp(QDialog, Ui_MainWindow):
     
     self.lineEdit.setText("")
     self.word = self.words.pop()
+    self.remainingReviews -= 1
     self.wrong = 0
     self.startTime = time.time()
     self.accumulatedTime = 0
@@ -166,6 +167,7 @@ class MyApp(QDialog, Ui_MainWindow):
     if self.word is not None and self.wrong >= 0:
       self.markAsFail()
     
+    self.setWindowTitle("Alldit")
     self.word = None
     self.list = None
     self.c.setHtml.emit("")
@@ -221,6 +223,9 @@ class MyApp(QDialog, Ui_MainWindow):
           html = re.sub('([^<"\'])' + '·?'.join(wordToHide).replace('.', '\\.') + '([^>"\'=\\d.])', '\\1__??__\\2', html,
                         flags=re.IGNORECASE)
     self.c.setHtml.emit(html)
+    
+    self.setWindowTitle("Alldit - %d words to review" % (self.remainingReviews) if self.remainingReviews >= 0
+                        else "Alldit - %d new words met today" % (-self.remainingReviews) )
   
   def selectList(self, item, column):
     file = ''
@@ -263,6 +268,7 @@ class MyApp(QDialog, Ui_MainWindow):
       shuffle(lastWrong)
       
       self.words = lastCorrect + unmet + lastWrong
+      self.remainingReviews = len(lastWrong)
       self.stackedWidget.setCurrentIndex(1)
       self.auditNext()
   
