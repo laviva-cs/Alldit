@@ -154,7 +154,7 @@ class MyApp(QDialog, Ui_MainWindow):
     self.html, self.wordsToHide, self.sounds = self.dict.lookup(self.word)
     if not self.hideWord: self.wordsToHide = []
     
-    try: self.wordsToHide = self.wordsToHide.replace("–", "-")
+    try: self.wordsToHide = [word.replace("–", "-") for word in self.wordsToHide]
     except: pass
     
     self.sounds = deque(set(self.sounds))
