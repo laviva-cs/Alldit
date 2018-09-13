@@ -96,7 +96,10 @@ class MWApiWrapper(metaclass=ABCMeta):
     suggestions = root.findall("suggestion")
     if suggestions:
       suggestions = [s.text for s in suggestions]
-      return self.lookup(suggestions[0])
+      suggested = suggestions[0]
+      if suggested == word:
+        os.remove(file)
+      return self.lookup(suggested)
     
     return self.parse_xml(root, word)
 
@@ -123,7 +126,7 @@ class LearnersDictionary(MWApiWrapper):
       return "<br />————————<br />".join([result[0] for result in results]), results[0][1], results[0][2]
     except:
       return "No dictionary entries found for %s! " % (word), [], []
-    
+  
   def generateEntry(self, entry):
     doc, tag, text = Doc().tagtext()
     
@@ -250,7 +253,7 @@ class LearnersDictionary(MWApiWrapper):
       'bnote': ('div', 'font-weight:600; background-color: #8b7a1455'),
       'snote': ('p', 'background-color: #8b7a14; margin-left:10px'),
       'entry': ('div', 'margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; '
-                     'text-indent:0px;font-family:\'SimSun\'; font-size:9pt; font-weight:normal; font-style:normal'),
+                       'text-indent:0px;font-family:\'SimSun\'; font-size:9pt; font-weight:normal; font-style:normal'),
       
       'hw': bold,
       'dro': ('p', 'margin-left:10px'),
